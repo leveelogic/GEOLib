@@ -586,8 +586,12 @@ class DStabilityModel(BaseModel):
         # Points is always returned, also if the point is not added
         return points
 
-    def connect_layers(self, layer1: PersistableLayer, layer2: PersistableLayer):
-        """Connects two polygons by adding a the missing points on the polygon edges. Returns the two new polygons."""
+    def connect_layers(
+        self, layer1: PersistableLayer, layer2: PersistableLayer, tolerance: float = 1e-4
+    ):
+        """Connects two polygons by adding a the missing points on the polygon edges.
+        Returns the two new polygons."""
+
         linestring1 = self.to_shapely_linestring(layer1.Points)
         linestring2 = self.to_shapely_linestring(layer2.Points)
 
